@@ -10,7 +10,7 @@ public:
             if(s[i]=='(')
                 lo++;
             else if(s[i]==')')
-                hi++;
+                hi+=1;
             
             if(lo==hi)
             {
