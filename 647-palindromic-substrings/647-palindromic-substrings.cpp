@@ -1,30 +1,47 @@
 class Solution {
 public:
-    
-    bool isPalindrome(string str)
-    {
-        string rev=str;
-        reverse(str.begin(),str.end());
-        if(str==rev)
-            return true;
-        return false;
-    }
-    
     int countSubstrings(string s) {
-        int ans=0;
-        
-        for(int i=0;i<s.size();i++)
+        int count=0,mid,left,right=0;
+        int length=s.size();
+        for(int i=0;i<length;i++)
         {
-            for(int j=i;j<s.size();j++)
+            mid=i;
+            left=mid-1;
+            right=mid+1;
+            count++;                        // Single character itself is a plaindrome
+            
+            while(left>=0 && right<length)  // For Odd Palindrome like 'aabaa' if we are at 'b' 
             {
-                string temp=s.substr(i,j-i+1);
-                if(isPalindrome(temp))
+                if(s[left]==s[right])
                 {
-                    ans++;
+                    count++;
+                    left--;
+                    right++;
+                }
+                else
+                    break;
+            }
+            
+            if(i<s.size()-1 && s[i]==s[i+1])  // For Even Palindrome like 'abccba' if we are at 1st 'c' then s[i]==s[i+1]
+            {
+                count++;                     //For what we have already checked i.e s[i]==s[i+1]
+                left=mid-1;
+                right=mid+2;
+                
+                while(left>=0 && right<length)
+                {
+                    if(s[left]==s[right])
+                    {
+                        count++;
+                        left--;
+                        right++;
+                    }
+                    else
+                        break;
                 }
             }
+            
         }
-        
-        return ans;
+        return count;
     }
 };
