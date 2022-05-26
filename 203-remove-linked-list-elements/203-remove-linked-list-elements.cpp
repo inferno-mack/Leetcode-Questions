@@ -23,8 +23,7 @@ public:
                 node->next=node->next->next;
             }
             else
-                node = node->next;
-            
+                node = node->next; 
         }
         
         return head;
