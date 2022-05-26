@@ -22,9 +22,8 @@ public:
             {
                 node->next=node->next->next;
             }
-            if(node->next and node->next->val != val)
+            else
                 node = node->next;
-            else if(node ->next == NULL) node = node->next;
             
         }
         
