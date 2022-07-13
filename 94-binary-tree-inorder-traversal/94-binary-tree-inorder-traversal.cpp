@@ -22,7 +22,7 @@ public:
                 node = node -> left;
             }
             else{
-                if(st.empty()) break;
+                if(st.empty() == true) break;
                 node = st.top();
                 st.pop();
                 inorder.push_back(node->val);
