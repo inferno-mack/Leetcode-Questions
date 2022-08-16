@@ -1,20 +1,21 @@
 class Solution {
 public:
-    int solve(int ind, vector<int> arr, int target,vector<vector<int>> &dp){
-        if(ind==0)
-            return (target%arr[0]==0);
+    int change(int val, vector<int>& arr) {
+        int n=arr.size();
+        vector<vector<int>> dp(n,vector<int>(val+1,0));
         
-        if(dp[ind][target]!=-1) return dp[ind][target];
-        int nottake=solve(ind-1, arr, target,dp);
-        int take=0;
-        if(arr[ind]<=target) take=solve(ind, arr, target-arr[ind],dp);
+        for(int tar=0;tar<=val;tar++)
+            dp[0][tar]=(tar%arr[0]==0);
         
-        return dp[ind][target]=nottake+take;
-    }
-    
-    int change(int amount, vector<int>& coins) {
-        int n=coins.size();
-        vector<vector<int>> dp(n,vector<int>(amount+1,-1));
-        return solve(n-1, coins, amount,dp);
+        for(int ind=1;ind<n;ind++){
+            for(int tar=0;tar<=val;tar++){
+                int nottake=dp[ind-1][tar];
+                int take=0;
+                if(arr[ind]<=tar) take=dp[ind][tar-arr[ind]];
+                
+                dp[ind][tar]=take+nottake;
+            }
+        }
+        return dp[n-1][val];
     }
 };
