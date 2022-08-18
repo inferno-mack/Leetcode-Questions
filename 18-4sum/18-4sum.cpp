@@ -11,7 +11,7 @@ public:
                 long new_target  = (long)target - nums[i] - nums[j];
                 int front = j+1 , back = n-1;
                 while(front < back){
-                    int sum = nums[front] + nums[back];
+                    long sum = nums[front] + nums[back];
                     if(sum > new_target) back--;
                     else if(sum < new_target ) front++;
                     else  {
