@@ -4,13 +4,11 @@ public:
         if(s.size()!=t.size()) return false;
         
         map<char,int> mps, mpt;
-        for(auto &it:s){
+        for(auto &it:s)
             mps[it]++;
-        }
         
-        for(auto &it:t){
+        for(auto &it:t)
             mpt[it]++;
-        }
         
         for(auto it=mps.begin(); it!=mps.end(); it++){
             if(mpt.find(it->first)==mpt.end()) return false;
@@ -25,15 +23,9 @@ public:
             vt.push_back(it.second);
         sort(vt.begin(),vt.end());
         
-        bool flag=false;
         for(int i=0;i<vs.size();i++){
-            if(vs[i]!=vt[i]){
-                flag=true;
-                break;
-            }
+            if(vs[i]!=vt[i])  return false;
         }
-        
-        if(flag) return false;
         return true;
     }
 };
