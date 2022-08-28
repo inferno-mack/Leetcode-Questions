@@ -3,7 +3,7 @@ public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         vector<int> ans;
         stack<int> st;
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         for(int i=nums2.size()-1;i>=0;i--){
             if(st.size()==0){
                 mp[nums2[i]]=-1;
