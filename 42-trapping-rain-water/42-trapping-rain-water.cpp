@@ -15,11 +15,7 @@ public:
         for(int j=n-2;j>=0;j--){
             mxr[j]=max(mxr[j+1],heights[j]);
         }
-        
-        for(auto it:mxl){
-            cout<<it<<" ";
-        }
-        
+
         for(int i=0;i<n;i++){
             res=res+(min(mxr[i],mxl[i])-heights[i]);
         }
