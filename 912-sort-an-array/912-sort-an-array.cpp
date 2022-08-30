@@ -1,47 +1,62 @@
 class Solution {
 public:
-    void merge(vector<int> &arr, int &low, int &mid, int &high){
-        int i=low, j=mid+1;
-        vector<int> temp;
-        while(i<=mid && j<=high){
-            if(arr[i]<=arr[j]){
-                temp.push_back(arr[i]);
-                i++;
+    void merge(vector<int>& v , int low , int mid , int high)
+    {
+        int i = low ;
+        int j = mid + 1 ;
+        
+        vector<int> v1 ;
+        
+        while(i<=mid&&j<=high)
+        {
+            if(v[i]<=v[j])
+            {
+                v1.push_back(v[i]) ;
+                i++ ;
             }
-            else{
-                temp.push_back(arr[j]);
-                j++;
+            else
+            {
+                v1.push_back(v[j]) ;
+                j++ ;
             }
         }
         
-        while(i<=mid){
-            temp.push_back(arr[i]);
-            i++;
+        while(i<=mid)
+        {
+            v1.push_back(v[i]) ;
+            i++ ;
         }
         
-        while(j<=high){
-            temp.push_back(arr[j]);
-            j++;
+        while(j<=high)
+        {
+            v1.push_back(v[j]) ;
+            j++ ;
         }
         
-        int ind=0;
-        for(i=low;i<=high;i++){
-            arr[i]=temp[ind];
-            ind++;
+        int curr = 0 ;
+        
+        for(i=low;i<=high;i++)
+        {
+            v[i] = v1[curr] ;
+            curr++ ;
         }
     }
     
-    void mergesort(vector<int> &arr, int low, int high){
-        if(low<high){
-            int mid=low+(high-low)/2;
-            mergesort(arr,low,mid);
-            mergesort(arr,mid+1,high);
-            merge(arr,low,mid,high);
+    void mergesort(vector<int>&v , int low , int high)
+    {
+        if(low<high)
+        {
+            int mid = low + (high-low)/2 ;
+            
+            mergesort(v,low,mid) ;
+            mergesort(v,mid+1,high) ;
+            merge(v,low,mid,high) ;
         }
     }
     
-    vector<int> sortArray(vector<int>& nums) {
-        mergesort(nums,0,nums.size()-1);
-        return nums;
+    vector<int> sortArray(vector<int>& v) {
+        mergesort(v,0,v.size()-1) ;
+        
+        return v ;
     }
 };
