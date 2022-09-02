@@ -1,41 +1,33 @@
 class Solution {
 public:
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
-        int n = grid.size();
+        int m=grid.size();
+        int n=grid[0].size();
+        int row[8]={1,-1,0,0,-1,-1,1,1};
+        int col[8]={0,0,1,-1,-1,1,-1,1};
+        if(grid[0][0]==1) return -1;
+        if(grid[m-1][n-1]==1) return -1;
+        if(m==1 and n==1 and grid[0][0]==0) return 1;
         
-        int row[] = {1, -1, 0, 0, 1, -1, 1, -1};
-        int col[] = {0, 0, 1, -1, 1, 1, -1, -1};
-        
-        if (grid[0][0] == 1) return -1;
-        if (grid[n-1][n-1] == 1) return -1;
-        
-        queue <pair<pair<int, int>, int>> q;
-        q.push({{0, 0}, 1});
-        
-        grid[0][0] = 1;
-        
-        while (!q.empty()){
-            int x = q.front().first.first;
-            int y = q.front().first.second;
-            int d = q.front().second;
+        priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>>> pq;
+        pq.push({1,{0,0}});
+        grid[0][0]=1;
+        while(!pq.empty()){
+            int dist=pq.top().first;
+            int i=pq.top().second.first;
+            int j=pq.top().second.second;
+            pq.pop();
             
-            if (x == n - 1 && y == n - 1){
-                return d;
-            }
-            
-            for (int i = 0; i < 8; i++){
-                int r = x + row[i];
-                int c = y + col[i];
-                
-                if (r >= 0 && r < n && c >= 0 && c < n && grid[r][c] == 0){
-                    grid[r][c] = 1;
-                    q.push({{r, c}, d + 1});
+            for(int k=0;k<8;k++){
+                int r = i + row[k];
+                int c = j + col[k];
+                if(r==(m-1) and (c==(n-1))) return dist+1;
+                if(r>=0 and r<m and c>=0 and c<n and grid[r][c]==0){
+                    grid[r][c]=1;
+                    pq.push({dist+1,{r,c}});
                 }
             }
-            
-            q.pop();
         }
-        
         return -1;
     }
 };
