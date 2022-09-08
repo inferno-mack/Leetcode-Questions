@@ -7,8 +7,6 @@ public:
             if(nums[i]!=nums[i-1])
                 ans.push_back(nums[i]);
         }
-        for(int i = 0; i < ans.size(); i++)
-            cout<<ans[i]<<" ";
         nums = ans;
         return ans.size();
     }
