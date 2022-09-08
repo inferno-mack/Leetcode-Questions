@@ -16,7 +16,10 @@ public:
         
         invertTree(root->left);
         invertTree(root->right);
-        swap(root->left, root->right);
+        TreeNode* temp;
+        temp=root->left;
+        root->left=root->right;
+        root->right=temp;
         return root;
     }
 };
