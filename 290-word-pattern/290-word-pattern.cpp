@@ -11,7 +11,6 @@ public:
             vec.push_back(temp);
             temp="";
         }
-        if(temp!="") vec.push_back(temp);
         
         if(vec.size()!=pattern.size())
             return false;
