@@ -11,9 +11,9 @@ public:
             vec.push_back(temp);
             temp="";
         }
-        vec.push_back(temp);
+        if(temp!="") vec.push_back(temp);
         
-        if((vec.size()-1)!=pattern.size())
+        if(vec.size()!=pattern.size())
             return false;
         
         unordered_map<char, string> mp;
