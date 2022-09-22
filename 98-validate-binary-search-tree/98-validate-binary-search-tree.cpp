@@ -33,7 +33,7 @@ int bstMin(TreeNode* root)
 }
 bool isValidBST (TreeNode* root)
 {
-	if (root == NULL || (root -> right == NULL && root -> left == NULL)) return true ;
+	if (root == NULL) return true ;
 	if (root -> left && root -> right)
 	{
 		int leftMax = bstMax (root->left);
