@@ -11,23 +11,56 @@
  */
 class Solution {
 public:
-   bool inorder(TreeNode* root, TreeNode*& prev)
+    /* Returns the maximum value in root node's subtree */
+int bstMax(TreeNode* root)
 {
-/* Perform inorder traversal and keep track of previous node */
-if (root) {
-if (!inorder(root->left, prev))
-return false;
-/* If inorder is not sorted then return false */
-if (prev != NULL && root->val <= prev->val)
-return false;
-prev = root;
-return inorder(root->right, prev);
+	int mx = root -> val;
+	if (root -> left)
+		mx = max(mx , bstMax(root -> left)) ;
+	if (root -> right)
+		mx = max(mx , bstMax(root -> right)) ;
+	return mx;
 }
-return true;
-}
-bool isValidBST(TreeNode* root)
+/* Returns the minimum value in root node's subtree */
+int bstMin(TreeNode* root)
 {
-TreeNode* prev = NULL;
-return inorder(root, prev);
+	int mn = root -> val;
+	if (root -> left)
+		mn = min(mn , bstMin(root -> left)) ;
+	if (root -> right)
+		mn = min(mn , bstMin(root -> right));
+	return mn;
+}
+    
+bool isValidBST (TreeNode* root)
+{
+	if (root == NULL) return true ;
+	if (root -> left && root -> right)
+	{
+		int leftMax = bstMax(root->left);
+		int rightMin = bstMin(root->right);
+// Return false if root node's value does not follow BST Property 
+        if (leftMax > root->val || rightMin < root->val)
+		    return false;
+	}
+	if (root -> left)
+	{
+		int leftMax = bstMax (root->left);
+		if (leftMax >= root->val)
+			return false;
+	}
+	if (root -> right)
+	{
+		int rightMin = bstMin(root->right);
+		if (rightMin <= root->val)
+			return false;
+	}
+// Recursively check if left and right subtrees are BST or not
+	bool left = isValidBST (root->left);
+	bool right = isValidBST (root->right) ;
+	if (left == true && right == true)
+		return true;
+	else
+		return false;
 }
 };
