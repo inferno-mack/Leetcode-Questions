@@ -11,56 +11,22 @@
  */
 class Solution {
 public:
-    /* Returns the maximum value in root node's subtree */
-int bstMax(TreeNode* root)
-{
-	int mx = root -> val;
-	if (root -> left)
-		mx = max(mx , bstMax(root -> left)) ;
-	if (root -> right)
-		mx = max(mx , bstMax(root -> right)) ;
-	return mx;
-}
-/* Returns the minimum value in root node's subtree */
-int bstMin(TreeNode* root)
-{
-	int mn = root -> val;
-	if (root -> left)
-		mn = min(mn , bstMin(root -> left)) ;
-	if (root -> right)
-		mn = min(mn , bstMin(root -> right));
-	return mn;
+    /* Inorder Traversal of the given Binary Tree */
+void inorder(TreeNode* root, vector<int> &in) {
+	if (root) {
+		inorder(root->left, in);
+		in.push_back(root->val);
+		inorder(root->right, in);
+	}
 }
     
-bool isValidBST (TreeNode* root)
-{
-	if (root == NULL) return true ;
-	if (root -> left && root -> right)
-	{
-		int leftMax = bstMax(root->left);
-		int rightMin = bstMin(root->right);
-// Return false if root node's value does not follow BST Property 
-        if (leftMax > root->val || rightMin < root->val)
-		    return false;
-	}
-	if (root -> left)
-	{
-		int leftMax = bstMax (root->left);
-		if (leftMax >= root->val)
-			return false;
-	}
-	if (root -> right)
-	{
-		int rightMin = bstMin(root->right);
-		if (rightMin <= root->val)
-			return false;
-	}
-// Recursively check if left and right subtrees are BST or not
-	bool left = isValidBST (root->left);
-	bool right = isValidBST (root->right) ;
-	if (left == true && right == true)
-		return true;
-	else
-		return false;
+bool isValidBST(TreeNode* root) {
+	vector<int> in;
+	inorder(root, in);
+	/* If in inorder traversal of Binary Tree , roots are not sorted then return false */
+	for (int i = 1; i < in.size(); i++)
+		if (in[i] <= in[i - 1]) return false;
+	return true;
 }
+
 };
