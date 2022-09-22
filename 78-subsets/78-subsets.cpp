@@ -1,22 +1,21 @@
 class Solution {
 public:
-    void generateAllSubsets(vector<int> nums, int currentInd, vector<int> &res, vector<vector<int>> &ans){
-        if(currentInd>=nums.size()){
+    void f(vector<int> nums, int ind, vector<int> &res, vector<vector<int>> &ans){
+        if(ind>=nums.size()){
             ans.push_back(res);
             return;
         }    
         
-        int currentval=nums[currentInd];
-        res.push_back(currentval);
-        generateAllSubsets(nums, currentInd+1, res, ans);
+        res.push_back(nums[ind]);
+        f(nums, ind+1, res, ans);
         res.pop_back();
-        generateAllSubsets(nums, currentInd+1, res, ans);
+        f(nums, ind+1, res, ans);
     }
     
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> powerSet;
+        vector<vector<int>> ans;
         vector<int> res;
-        generateAllSubsets(nums, 0, res, powerSet);
-        return powerSet;
+        f(nums, 0, res, ans);
+        return ans;
     }
 };
