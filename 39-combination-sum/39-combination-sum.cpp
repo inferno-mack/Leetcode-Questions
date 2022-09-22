@@ -1,26 +1,24 @@
 class Solution {
 public:
-    
-    void findcombo(int ind, vector<int> candidates, int target, vector<int> &ds, vector<vector<int>> &ans){
-        if(ind == candidates.size()){
-            if(target == 0)
-                ans.push_back(ds);
+    void f(int ind, vector<int> nums, vector<int> &res, vector<vector<int>> &ans, int target){
+        if(target==0){
+            ans.push_back(res);
             return;
         }
+        if(ind==nums.size()) return;
         
-        if(candidates[ind]<=target){
-            ds.push_back(candidates[ind]);
-            findcombo(ind, candidates, target-candidates[ind], ds, ans);
-            ds.pop_back();
+        if(nums[ind]<=target){
+            res.push_back(nums[ind]);
+            f(ind, nums, res, ans, target-nums[ind]);
+            res.pop_back();
         }
-        
-        findcombo(ind+1, candidates, target, ds, ans);
+        f(ind+1, nums, res, ans, target);
     }
     
-    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+    vector<vector<int>> combinationSum(vector<int>& nums, int target) {
         vector<vector<int>> ans;
-        vector<int> ds;
-        findcombo(0, candidates, target, ds, ans);
+        vector<int> res;
+        f(0, nums, res, ans, target);
         return ans;
     }
 };
