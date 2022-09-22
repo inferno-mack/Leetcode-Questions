@@ -11,22 +11,24 @@
  */
 class Solution {
 public:
-    /* Inorder Traversal of the given Binary Tree */
-void inorder(TreeNode* root, vector<int> &in) {
+    bool inorder(TreeNode* root, TreeNode*& prev)
+{
+	/* Perform inorder traversal and keep track of previous node */
 	if (root) {
-		inorder(root->left, in);
-		in.push_back(root->val);
-		inorder(root->right, in);
+		if (!inorder(root->left, prev))
+			return false;
+		/* If inorder is not sorted then return false */
+		if (prev != NULL && root->val <= prev->val)
+			return false;
+		prev = root;
+		return inorder(root->right, prev);
 	}
-}
-    
-bool isValidBST(TreeNode* root) {
-	vector<int> in;
-	inorder(root, in);
-	/* If in inorder traversal of Binary Tree , roots are not sorted then return false */
-	for (int i = 1; i < in.size(); i++)
-		if (in[i] <= in[i - 1]) return false;
 	return true;
+}
+bool isValidBST(TreeNode* root)
+{
+	TreeNode* prev = NULL;
+	return inorder(root, prev);
 }
 
 };
