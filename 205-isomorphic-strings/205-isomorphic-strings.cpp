@@ -1,17 +1,21 @@
 class Solution {
 public:
-    bool solve(string s, string t){
-        map<int,int> mp;
-        for(int i=0;i<s.size();i++){
-            if(mp.find(s[i])!=mp.end()){
-                if(mp[s[i]]!=t[i]) return false;
-            }        
-            else mp[s[i]]=t[i];
+    bool isIsomorphic(string pattern, string s) {
+        vector<string> vec;
+        unordered_map<char, char> mp;
+        unordered_map<char, char> mp1;
+        for(int i=0;i<pattern.size();i++){
+            if(mp.count(pattern[i]) && mp1.count(s[i])){
+                if(mp[pattern[i]]!=s[i] || mp1[s[i]]!=pattern[i])
+                    return false;
+            }
+            else if(mp.count(pattern[i])==false && mp1.count(s[i])==false){
+                mp[pattern[i]]=s[i];
+                mp1[s[i]]=pattern[i];
+            }
+            else
+                return false;
         }
         return true;
-    }
-    
-    bool isIsomorphic(string s, string t) {
-        return solve(s,t) && solve(t,s);
     }
 };
