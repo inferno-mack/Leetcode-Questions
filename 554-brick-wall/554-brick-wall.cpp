@@ -1,7 +1,7 @@
 class Solution {
 public:
     int leastBricks(vector<vector<int>>& wall) {
-        map<int,int> mp;
+        unordered_map<int,int> mp;
         int last;
         
         for(int i=0;i<wall.size();i++){
