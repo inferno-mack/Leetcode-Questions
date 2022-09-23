@@ -9,10 +9,10 @@ public:
                 ct++;
             else ct--;
             if(mp.find(ct)!=mp.end()){
-                ans=max(ans,i-mp[ct]);
+                ans=max(ans,i-mp[ct]);  // if count is already exist in map update the length of subarray 
             }
             else{
-                mp[ct]=i;
+                mp[ct]=i;   // map is storing the index of first instance of each count
             }
         }
         return ans;
