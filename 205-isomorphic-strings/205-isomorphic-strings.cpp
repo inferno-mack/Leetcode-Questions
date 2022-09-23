@@ -1,7 +1,6 @@
 class Solution {
 public:
     bool isIsomorphic(string pattern, string s) {
-        vector<string> vec;
         unordered_map<char, char> mp;
         unordered_map<char, char> mp1;
         for(int i=0;i<pattern.size();i++){
