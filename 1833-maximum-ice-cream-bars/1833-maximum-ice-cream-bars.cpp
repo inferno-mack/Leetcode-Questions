@@ -1,17 +1,24 @@
 class Solution {
 public:
     int maxIceCream(vector<int>& costs, int coins) {
-        sort(costs.begin(), costs.end());
-        vector<long long> prefixsum(costs.size(), costs[0]);
+        vector<long long> freq(100001,0);
+        for(int i=0;i<costs.size();i++)
+            freq[costs[i]]++;
         
-        for(int i=1;i<costs.size();i++)
-            prefixsum[i]=costs[i]+prefixsum[i-1];
-        
-        for(int i=0;i<prefixsum.size();i++){
-            if(prefixsum[i]>coins){
-                return i;
+        long long ans=0;
+        for(long long i=0;i<100001;i++){
+            if(freq[i]!=0){
+                long long cost=i*freq[i];
+                if(coins>=cost){
+                    ans+=freq[i];
+                    coins-=cost;
+                }
+                else{
+                    ans+=(coins/i);
+                    coins=coins-(i*(coins/i));
+                }
             }
         }
-        return costs.size();
+        return ans;
     }
 };
