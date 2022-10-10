@@ -10,9 +10,9 @@ public:
             for(int buy=0;buy<=1;buy++){
                     int profit=0;
                     if(buy)
-                        profit=max(-prices[ind]+ahead[0], 0 + ahead[1]);
+                        profit=max(-prices[ind]-fee+ahead[0], 0 + ahead[1]);
                     else
-                        profit=max(prices[ind]-fee+ahead[1], 0+ahead[0]);
+                        profit=max(prices[ind]+ahead[1], 0+ahead[0]);
 
                     curr[buy]=profit;
             }
