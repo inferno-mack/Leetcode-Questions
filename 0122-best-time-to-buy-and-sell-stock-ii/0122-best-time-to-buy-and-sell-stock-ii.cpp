@@ -7,18 +7,8 @@ public:
         aheadNotBuy=aheadBuy=0;
         
         for(int ind=n-1;ind>=0;ind--){
-            for(int buy=0;buy<=1;buy++){
-                    int profit=0;
-                    if(buy)
-                        profit=max(-prices[ind]+aheadNotBuy, 0 + aheadBuy);
-                    else
-                        profit=max(prices[ind]+aheadBuy, 0+aheadNotBuy);
-
-                    if(buy)
-                        currBuy=profit;
-                    else
-                        currNotBuy=profit;
-            }
+            currBuy=max(-prices[ind]+aheadNotBuy, 0 + aheadBuy);
+            currNotBuy=max(prices[ind]+aheadBuy, 0+aheadNotBuy);
             aheadNotBuy=currNotBuy;
             aheadBuy=currBuy;
         }
