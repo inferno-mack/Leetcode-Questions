@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int solve(int ind, int buy, vector<int> prices,vector<vector<int>> &dp){
+    int solve(int ind, int buy, vector<int> &prices,vector<vector<int>> &dp){
         if(ind >= prices.size())
             return 0;
         
