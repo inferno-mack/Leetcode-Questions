@@ -1,17 +1,14 @@
 class Solution {
-public:    
-    int maxProfit(vector<int>& prices) {
-        int n=prices.size();
-        int aheadNotBuy=0, aheadBuy=0, currNotBuy=0, currBuy=0;
+public:
+    int maxProfit(vector<int>& arr) {
         
-        aheadNotBuy=aheadBuy=0;
-        
-        for(int ind=n-1;ind>=0;ind--){
-            currBuy=max(-prices[ind]+aheadNotBuy, 0 + aheadBuy);
-            currNotBuy=max(prices[ind]+aheadBuy, 0+aheadNotBuy);
-            aheadNotBuy=currNotBuy;
-            aheadBuy=currBuy;
+        int ans=0;
+        for(int i=0;i<arr.size()-1;i++)
+        {
+            if(arr[i+1]>arr[i])
+                ans+=(arr[i+1]-arr[i]);
         }
-        return aheadBuy;
+        
+        return ans;
     }
 };
