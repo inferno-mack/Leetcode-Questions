@@ -10,26 +10,27 @@
  */
 class Solution {
 public:
+    ListNode* reverseList(ListNode* head){
+        ListNode* newhead=NULL;
+        while(head){
+            ListNode* next=head->next;
+            head->next=newhead;
+            newhead=head;
+            head=next;
+        }
+        return newhead;
+    }
+    
     int getDecimalValue(ListNode* head) {
         
         if(head==NULL) return 0;
-        ListNode* node=NULL;
-        while(head)
-        {
-            ListNode* next=head->next;
-            head->next=node;
-            node=head;
-            head=next;
+        head=reverseList(head);
+        int value=0, ans=0;
+        while(head){
+            ans+=(head->val)*pow(2,value);
+            value++;
+            head=head->next;
         }
-        
-        int ans=0,i=0;
-        while(node)
-        {
-            ans+=((node->val)*pow(2,i));
-            i++;
-            node=node->next;
-        }
-        
         return ans;
     }
 };
